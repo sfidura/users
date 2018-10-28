@@ -32,11 +32,12 @@ class Users extends Component{
             })
        } else{
            console.log("Wyjątek walidacji!")
+          
        }
     }
 
     validateUser = field => {
-        if(field.value === ""){
+        if(field.value.trim() === ""){
             return false;
         }else {
             return true;
@@ -64,7 +65,7 @@ class Users extends Component{
                     <input type="text" id="surname" placeholder="Nazwisko" ref={this.refSurname} />
                     <button type="submit" id="addUser">Dodaj użytkownika</button>
                 </form>
-
+                <div className="error"></div>
                 <UsersList usersList = {this.state.usersList}  removeUser = {this.removeUser}/>
                 
             </div>
