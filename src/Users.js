@@ -15,21 +15,33 @@ class Users extends Component{
 
     addUser = (event) => {
         event.preventDefault();
-        console.log(this.refName.current.value + " " + this.refSurname.current.value);
+        // console.log(this.refName.current.value + " " + this.refSurname.current.value);
 
-        let newUser = {
-            key: Date.now(),
-            userName: this.refName.current.value,
-            userSurname: this.refSurname.current.value, 
-        }
+       if(this.validateUser(this.refName.current) && this.validateUser(this.refSurname.current)){
+            let newUser = {
+                key: Date.now(),
+                userName: this.refName.current.value,
+                userSurname: this.refSurname.current.value, 
+            }
 
-        this.setState(() => {
-            return({
-                usersList: this.state.usersList.concat(newUser),
+            this.setState(() => {
+                return({
+                    usersList: this.state.usersList.concat(newUser),
+                })
+                
             })
-            
-        })
+       } else{
+           console.log("Wyjątek walidacji!")
+       }
+    }
 
+    validateUser = field => {
+        if(field.value === ""){
+            return false;
+        }else {
+            return true;
+        }
+        
     }
 
     removeUser = (userKey) => {
